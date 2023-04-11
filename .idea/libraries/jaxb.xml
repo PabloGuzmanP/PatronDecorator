@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="jaxb">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Downloads/jaxb" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/jaxb" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/jaxb" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/jaxb" recursive="false" type="SOURCES" />
+  </library>
+</component>
