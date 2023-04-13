@@ -1,9 +1,6 @@
 package patrondecorator;
 
-import decoradores.CifrarMensaje;
-import decoradores.CredencialesMensaje;
-import decoradores.MensajeSOAP;
-import decoradores.FormatoDecoradorXML;
+import decoradores.*;
 import mensajes.InterfaceMensaje;
 import mensajes.MensajeCliente;
 
@@ -30,9 +27,14 @@ public class PatronDecoratorMain {
                 new MensajeSOAP(
                         new CifrarMensaje("user", "HG58YZ3CR9123456",
                             new FormatoDecoradorXML(MensajeUsuario)))).ProcesarMensaje();
-        System.out.println("Mensaje No. 3 =====================================>\n"
+        System.out.println("message3 =====================================>\n"
                 + F3Mensaje.getContenido());
 
-
+        InterfaceMensaje F4Mensaje = new DatosEmpresa(
+                new MensajeSOAP(
+                    new CifrarMensaje("user", "HG58YZ3CR9123456",
+                        new FormatoDecoradorXML(MensajeUsuario))), "Mi Empresa", "Mi Dirección", "12345678", "correo@miempresa.com").ProcesarMensaje();
+        System.out.println("message4 =====================================>\n"
+                + F4Mensaje.getContenido());
     }
 }
