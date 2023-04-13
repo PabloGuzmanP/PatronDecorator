@@ -40,7 +40,6 @@ public class CifrarMensaje extends DecoradorMensaje{
     public InterfaceMensaje ProcesarMensaje() {
         this.Formatomensaje = Formatomensaje.ProcesarMensaje();
         encryptMessage();
-        agregarCredenciales();
         return Formatomensaje;
     }
     private InterfaceMensaje encryptMessage() {
@@ -60,22 +59,5 @@ public class CifrarMensaje extends DecoradorMensaje{
             throw new RuntimeException();
         }
 
-    }
-    private InterfaceMensaje agregarCredenciales(){
-        try {
-            String contenido = Formatomensaje.getContenido();
-            String header = "<soapenv:Header>\n" +
-                    "<usuario>" + usuario + "</usuario>\n" +
-                    "<password>" + password + "</password>\n" +
-                    "</soapenv:Header>\n";
-
-            String mensajeSOAP = contenido.replace("<soapenv:Body>", header + "<soapenv:Body>");
-
-            Formatomensaje.setContenido(mensajeSOAP);
-            return Formatomensaje;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
     }
 }
