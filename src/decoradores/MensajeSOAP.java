@@ -2,6 +2,8 @@ package decoradores;
 
 import mensajes.InterfaceMensaje;
 
+import java.text.Normalizer;
+
 public class MensajeSOAP extends DecoradorMensaje{
     public MensajeSOAP(InterfaceMensaje Formatomensaje) {
         super(Formatomensaje);

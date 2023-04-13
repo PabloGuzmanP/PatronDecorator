@@ -3,7 +3,10 @@ package decoradores;
 import java.security.Key;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.*;
+
 import mensajes.InterfaceMensaje;
+
 import java.util.Base64;
 
 public class CifrarMensaje extends DecoradorMensaje{
@@ -33,14 +36,13 @@ public class CifrarMensaje extends DecoradorMensaje{
         this.usuario = usuario;
         this.password = password;
     }
-
     @Override
     public InterfaceMensaje ProcesarMensaje() {
         this.Formatomensaje = Formatomensaje.ProcesarMensaje();
         encryptMessage();
+        agregarCredenciales();
         return Formatomensaje;
     }
-
     private InterfaceMensaje encryptMessage() {
         try {
             Key key = new SecretKeySpec(password.getBytes(), "AES");
@@ -58,5 +60,22 @@ public class CifrarMensaje extends DecoradorMensaje{
             throw new RuntimeException();
         }
 
+    }
+    private InterfaceMensaje agregarCredenciales(){
+        try {
+            String contenido = Formatomensaje.getContenido();
+            String header = "<soapenv:Header>\n" +
+                    "<usuario>" + usuario + "</usuario>\n" +
+                    "<password>" + password + "</password>\n" +
+                    "</soapenv:Header>\n";
+
+            String mensajeSOAP = contenido.replace("<soapenv:Body>", header + "<soapenv:Body>");
+
+            Formatomensaje.setContenido(mensajeSOAP);
+            return Formatomensaje;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }
